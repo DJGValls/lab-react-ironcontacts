@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import contacts from "./contacts.json";
 import { useState } from 'react';
@@ -53,6 +52,34 @@ function App() {
 
   }
 
+  const sortByName = ()=>{
+    const currentContactsClone = [...currentContacts];
+    currentContactsClone.sort((elem2, elem1)=>{
+      if (elem2.name[0] > elem1.name[0]) {
+        return 1
+      } else if (elem2.name[0] < elem1.name[0]) {
+        return -1
+      } else {
+        return 0
+      }
+    })
+    setCurrentContacts(currentContactsClone)
+  }
+
+  const sortByPopularity = ()=>{
+    const currentContactsClone = [...currentContacts];
+    currentContactsClone.sort((elem2, elem1)=>{
+      if (elem2.popularity < elem1.popularity) {
+        return 1
+      } else if (elem2.popularity > elem1.popularity) {
+        return -1
+      } else {
+        return 0
+      }
+    })
+    setCurrentContacts(currentContactsClone)
+  }
+
 
 
   return (
@@ -60,6 +87,8 @@ function App() {
     <div className="App">
       <h1>IronContacts</h1>
       <button onClick={addContact}>Add Contact</button>
+      <button onClick={sortByName}>Sort by Name</button>
+      <button onClick={sortByPopularity}>Sort by Popularity</button>
       <div style={cardContainer}>
         {currentContacts.map((eachContact)=>{
           return(
