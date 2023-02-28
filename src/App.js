@@ -80,6 +80,17 @@ function App() {
     setCurrentContacts(currentContactsClone)
   }
 
+  const deleteContact =  (idToDelete)=>{
+    const filteredArray = currentContacts.filter((eachContact =>{
+      if (eachContact.id === idToDelete) {
+        return false
+      } else {
+        return true
+      }
+    }))
+    setCurrentContacts(filteredArray)
+  }
+
 
 
   return (
@@ -98,6 +109,7 @@ function App() {
               <h3>Popularity: {eachContact.popularity}</h3>
               <h3>{(eachContact.wonEmmy === true) && <span>Won the emy</span>}</h3>
               <h3>{(eachContact.wonOscar === true) && <span>Won the Oscar</span>}</h3>
+              <button onClick={()=> deleteContact(eachContact.id)}>Delete Contact</button>
             </div>
           )
         })  }
